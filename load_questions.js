@@ -12,8 +12,8 @@ var DBconn = null;
 
 var con = mysql.createConnection({
     host: "localhost",
-    user: "root",
-    password: "12345",
+    user: "admin",
+    password: "passwords",
     database: 'stackNetwork'
 }).then(function(conn) {
     console.log("Connected");
