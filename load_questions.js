@@ -3,8 +3,7 @@ var mysql = require('promise-mysql');
 // const json2csv = require('json2csv');
 const Promise = require('bluebird');
 
-//const fs = require('fs');
-//const fields = ['id', 'location'];
+var inputDate = process.argv[2];
 
 // Google Cloud Platform project ID
 const projectId = 'utility-ratio-190419';
@@ -13,7 +12,7 @@ var DBconn = null;
 var con = mysql.createConnection({
     host: "localhost",
     user: "admin",
-    password: "passwords",
+    password: "password",
     database: 'stackNetwork'
 }).then(function(conn) {
     console.log("Connected");
@@ -83,12 +82,16 @@ var q1 = `SELECT
     p.id, u.location 
     FROM \`bigquery-public-data.stackoverflow.posts_questions\` p
     JOIN \`bigquery-public-data.stackoverflow.users\` u ON p.owner_user_id = u.id
-    WHERE p.creation_date > '2017-10-28' and u.location IS NOT NULL and u.location!=''`;
+    WHERE p.creation_date > '`+inputDate+`' and u.location IS NOT NULL and u.location!=''`;
 
 //var q2 = `DESCRIBE bigquery-public-data.stackoverflow.posts_questions`;
-queryStackOverflow(projectId, q1);
+//queryStackOverflow(projectId, q1);
 //queryStackOverflow(projectId, q2);
+
+DBconn.query('DELETE FROM posts_questions').then(function(){
+	queryStackOverflow(projectId, q1);
+});
 
 function saveToDB(records, promises) {
     promises.push(DBconn.query('INSERT INTO  posts_questions (id, Location) VALUES ?', [records]));
-}
+};
