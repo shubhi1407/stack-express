@@ -31,10 +31,10 @@
        el.html(el.html()+' (Questions < 5)');
        return;  
     }
-    el.html(el.html()+' (Questions - '+data[code]+')');
+    el.html(el.html()+' (Questions - '+data.result[code]+')');
   }
   });
-   $("#creation_date").text(data.creation_date); 
+   $("#creation_date").text(data.creation_Date); 
  
 });
 
