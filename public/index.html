@@ -16,7 +16,7 @@
   <script>
     
     $.get("http://35.224.68.135:3001/getColumns", function( data ) {
-
+  
       $('#world-map').vectorMap({
   map: 'world_mill',
   series: {
@@ -27,7 +27,7 @@
     }]
   },
   onRegionTipShow: function(e, el, code){
-    if(data[code]==undefined){
+    if(data.result[code]==undefined){
        el.html(el.html()+' (Questions < 5)');
        return;  
     }
