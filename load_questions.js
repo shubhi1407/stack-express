@@ -17,6 +17,9 @@ var con = mysql.createConnection({
 }).then(function(conn) {
     console.log("Connected");
     DBconn = conn;
+    DBconn.query('DELETE FROM posts_questions').then(function(){
+		queryStackOverflow(projectId, q1);
+	});
 }).catch(function(err) {
     console.error("Error connection to databse");
     console.log(err);
@@ -88,9 +91,6 @@ var q1 = `SELECT
 //queryStackOverflow(projectId, q1);
 //queryStackOverflow(projectId, q2);
 
-DBconn.query('DELETE FROM posts_questions').then(function(){
-	queryStackOverflow(projectId, q1);
-});
 
 function saveToDB(records, promises) {
     promises.push(DBconn.query('INSERT INTO  posts_questions (id, Location) VALUES ?', [records]));
