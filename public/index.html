@@ -12,6 +12,7 @@
 </head>
 <body>
   <div id="world-map" style="width: 1000px; height: 800px"></div>
+  <span id="creation_date"></span>
   <script>
     
     $.get("http://35.224.68.135:3001/getColumns", function( data ) {
@@ -20,7 +21,7 @@
   map: 'world_mill',
   series: {
     regions: [{
-      values: data,
+      values: data.result,
       scale: ['#C8EEFF', '#0071A4'],
       normalizeFunction: 'polynomial'
     }]
@@ -33,9 +34,11 @@
     el.html(el.html()+' (Questions - '+data[code]+')');
   }
   });
-    
+   $("#creation_date").text(data.creation_date); 
  
 });
+
+
   </script>
 </body>
 </html>
