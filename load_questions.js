@@ -9,7 +9,7 @@ var inputDate = process.argv[2];
 const projectId = 'utility-ratio-190419';
 var DBconn = null;
 
-var con = mysql.createConnection({
+mysql.createConnection({
     host: "localhost",
     user: "admin",
     password: "password",
@@ -17,11 +17,12 @@ var con = mysql.createConnection({
 }).then(function(conn) {
     console.log("Connected");
     DBconn = conn;
-    DBconn.query('DELETE FROM posts_questions').then(function(){
-		queryStackOverflow(projectId, q1);
-	});
-}).catch(function(err) {
-    console.error("Error connection to databse");
+    return DBconn.query('DELETE FROM posts_questions')
+}).then(function(){
+	queryStackOverflow(projectId, q1);
+})
+.catch(function(err) {
+    console.error("Error connection to database");
     console.log(err);
 });
 

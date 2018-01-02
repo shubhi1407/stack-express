@@ -11,13 +11,14 @@
     <script src="http://jvectormap.com/js/jquery-jvectormap-world-mill.js"></script>
   </head>
   <body>
-    <div id="world-map" style="width: 1000px; height: 800px"></div>
+    <div id="world-map-que" style="width: 1000px; height: 800px"></div>
+    <div id="world-map-ans" style="width: 1000px; height: 800px"></div>
     <span id="creation_date"></span>
     <script>
     
-    $.get("http://35.224.68.135:3001/getColumns", function( data ) {
+    $.get("http://35.224.68.135:3001/getData/demographic_questions", function( data ) {
     
-    $('#world-map').vectorMap({
+    $('#world-map-que').vectorMap({
     map: 'world_mill',
     series: {
     regions: [{
@@ -35,6 +36,27 @@
     }
     });
     $("#creation_date").text(data.creation_Date);
+    
+    });
+    $.get("http://35.224.68.135:3001/getData/demographic_answers", function( data ) {
+    
+    $('#world-map-ans').vectorMap({
+    map: 'world_mill',
+    series: {
+    regions: [{
+    values: data.result,
+    scale: ['#C8EEFF', '#0071A4'],
+    normalizeFunction: 'polynomial'
+    }]
+    },
+    onRegionTipShow: function(e, el, code){
+    if(data.result[code]==undefined){
+    el.html(el.html()+' (Questions < 5)');
+    return;
+    }
+    el.html(el.html()+' (Questions - '+data.result[code]+')');
+    }
+    });  
     
     });
     </script>

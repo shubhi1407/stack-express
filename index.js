@@ -20,8 +20,10 @@ con.connect(function(err) {
     console.log("Connected!");
 });
 
-app.get('/getColumns', function(req, res) {
-    con.query('select * from demographic where DATE(creation_date)=(select DATE(MAX(creation_date)) from demographic)', function(error, results) {
+app.get('/getData/:table', function(req, res) {
+	var table=req.params.table;
+
+    con.query('select * from ' +table+' where DATE(creation_date)=(select DATE(MAX(creation_date)) from ' +table+ ' )', function(error, results) {
         var creationDate = results[0].creation_date;
         if (error) throw error;
         var response = {};
