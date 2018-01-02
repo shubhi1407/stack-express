@@ -12,10 +12,10 @@
   </head>
   <body style="background-color: rgb(80,80,80);">
     <div style="width: 50%;float:left;">
-    <div id="world-map-que" style="height: 800px;padding:20px"></div>
+    <div id="world-map-que" style="height: 470px;padding:20px"></div>
   </div>
   <div style="width: 50%;float:left;">
-    <div id="world-map-ans" style="height: 800px;padding:20px;"></div>
+    <div id="world-map-ans" style="height: 470;padding:20px;"></div>
   </div>
     <span id="creation_date"></span>
     <script>
@@ -55,10 +55,10 @@
     },
     onRegionTipShow: function(e, el, code){
     if(data.result[code]==undefined){
-    el.html(el.html()+' (Questions < 5)');
+    el.html(el.html()+' (Answers < 5)');
     return;
     }
-    el.html(el.html()+' (Questions - '+data.result[code]+')');
+    el.html(el.html()+' (Answers - '+data.result[code]+')');
     }
     });  
     
