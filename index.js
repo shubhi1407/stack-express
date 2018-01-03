@@ -45,4 +45,4 @@ app.get('/getData/:table', function(req, res) {
 
 });
 
-app.listen(3001);
+app.listen(80);
