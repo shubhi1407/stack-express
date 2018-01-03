@@ -6,7 +6,7 @@ var countries = require('./countries.json');
 
 var app = express();
 app.use(cors());
-app.use(express.static('public'))
+app.use('/',express.static('public'));
 
 var con = mysql.createConnection({
     host: "localhost",
