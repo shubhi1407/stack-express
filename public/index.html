@@ -34,7 +34,7 @@
     </div>
     <script>
     
-    $.get("http://35.224.68.135:3001/getData/demographic_questions", function( data ) {
+    $.get("http://stackxchange.info/getData/demographic_questions", function( data ) {
     
     $('#world-map-que').vectorMap({
     map: 'world_mill',
@@ -59,7 +59,7 @@
     $("#creation_date").text(data.creation_Date);
     
     });
-    $.get("http://35.224.68.135:3001/getData/demographic_answers", function( data ) {
+    $.get("http://stackxchange.info/getData/demographic_answers", function( data ) {
     
     $('#world-map-ans').vectorMap({
     map: 'world_mill',
