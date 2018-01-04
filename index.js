@@ -51,7 +51,7 @@ app.get('/getData/:table', function(req, res) {
         })       
         res.json({
             creation_Date: creationDate,
-            count:count;
+            count:count,
             result: response
         });
     })
