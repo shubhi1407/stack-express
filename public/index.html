@@ -46,6 +46,11 @@
         <span >Last updated on:</span>
         <span id="creation_date"></span>
       </div>
+      <div class="row">
+        <div class="col-xs-12">
+          The analysis is performed on publicly available Stack<b>overflow</b> data. This <a href="https://gist.github.com/shubhi1407/0ec93b5ec7eacfc5cfb7c7766c504da4">script</a> is scheduled to run every 2 months to download data using Google BigQuery. It then spins up an Apache Spark cluster which processes the data and outputs country wise counts to a MySQL instance. 
+        </div>
+      </div>
     </div>
     <script>
     
