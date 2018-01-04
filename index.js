@@ -38,7 +38,9 @@ app.get('/getData/:table', function(req, res) {
         var creationDate = results[0].creation_date;
         if (error) throw error;
         var response = {};
+        var count=0;
         _.each(results, function(res) {
+        	count+=res.count;
             var country = _.find(countries, function(country) {
                 return country.name == res.Location;
 
@@ -46,10 +48,10 @@ app.get('/getData/:table', function(req, res) {
             if (country != null && country != undefined) {
                 response[country.code] = res.count;
             }
-        })
-
+        })       
         res.json({
             creation_Date: creationDate,
+            count:count;
             result: response
         });
     })
