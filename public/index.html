@@ -15,6 +15,11 @@
     <script src="jquery-jvectormap-2.0.3.min.js"></script>
     <script src="http://jvectormap.com/js/jquery-jvectormap-world-mill.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+     <style>
+     a {
+      color:orange !important;
+     }
+   </style>
   </head>
   <body style="background-color: rgb(80,80,80);">
     <!-- <a href="https://github.com/shubhi1407/stack-sparkBackend"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
@@ -47,8 +52,8 @@
         <span id="creation_date"></span>
       </div>
       <div class="row">
-        <div class="col-xs-12">
-          The analysis is performed on publicly available Stack<b>overflow</b> data. This <a href="https://gist.github.com/shubhi1407/0ec93b5ec7eacfc5cfb7c7766c504da4">script</a> is scheduled to run every 2 months to download data using Google BigQuery. It then spins up an Apache Spark cluster which processes the data and outputs country wise counts to a MySQL instance. 
+        <div class="col-xs-12" style="font-size: 17px;color:#fff;">
+          Analytics is performed on publicly available Stack<b>overflow</b> <a href="https://archive.org/details/stackexchange">data</a>. This <a href="https://gist.github.com/shubhi1407/0ec93b5ec7eacfc5cfb7c7766c504da4">script</a> is scheduled to run every 2 months to download data using Google BigQuery. It then spins up an Apache Spark cluster which processes the data and outputs country wise counts to a MySQL instance. More coming soon !
         </div>
       </div>
     </div>
