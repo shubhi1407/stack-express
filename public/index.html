@@ -65,7 +65,7 @@
     el.html(el.html()+' (Questions - '+data.result[code]+')');
     }
     });
-    $("#creation_date").text(moment(data.creation_Date,'DD-MM-YYYY').format());
+    $("#creation_date").text(moment(data.creation_Date).format('DD-MM-YYYY'));
     $("#count_que").text(data.count);
     
     });
