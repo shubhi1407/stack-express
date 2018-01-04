@@ -14,6 +14,7 @@
     crossorigin="anonymous"></script>
     <script src="jquery-jvectormap-2.0.3.min.js"></script>
     <script src="http://jvectormap.com/js/jquery-jvectormap-world-mill.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
   </head>
   <body style="background-color: rgb(80,80,80);">
     <div class="container-fluid">
@@ -64,7 +65,7 @@
     el.html(el.html()+' (Questions - '+data.result[code]+')');
     }
     });
-    $("#creation_date").text(data.creation_Date);
+    $("#creation_date").text(moment(data.creation_Date,'DD-MM-YYYY'));
     $("#count_que").text(data.count);
     
     });
