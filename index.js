@@ -39,10 +39,12 @@ app.get('/getData/tags',function(req,res){
 	    return;
 	}
 	
-	results = results.map(function(res){
+	results = results.map(function(res,index){
+	    var counts = res.counts.split(", ");
+	    counts.unshift(index);
 	    return {
 		tagName:res.tagName,
-		counts:res.counts.split(", ")
+		counts:counts
 	    }
 	});
 	res.json({
