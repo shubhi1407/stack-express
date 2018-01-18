@@ -15,10 +15,22 @@
     <script src="jquery-jvectormap-2.0.3.min.js"></script>
     <script src="http://jvectormap.com/js/jquery-jvectormap-world-mill.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+     <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/parallel-coordinates.js"></script>
      <style>
      a {
       color:orange !important;
      }
+     #container {
+        max-width: 800px;
+        height: 400px;
+        margin: 1em auto;
+    }
+
+    .highcharts-series-hover path {
+      stroke: rgb(255, 66, 66);
+        stroke-width: 2px;
+    }
    </style>
   </head>
   <body style="background-color: rgb(80,80,80);">
@@ -57,6 +69,7 @@
         </div>
       </div>
     </div>
+    <div id="container"></div>
     <script>
     
     $.get("http://stackxchange.info/getData/demographic_questions", function( data ) {
@@ -103,6 +116,92 @@
     });
     $("#count_ans").text(data.count);
     });
+
+    $.getJSON('http://stackxchange.info/getData/tags', function (data) {
+    var dataArray = data.counts;
+    var tags = data.tags;
+    console.log(data);
+    Highcharts.chart('container', {
+        chart: {
+            type: 'spline',
+            parallelCoordinates: true,
+            parallelAxes: {
+                lineWidth: 2
+            }
+        },
+        title: {
+            text: 'Stack exchange tags'
+        },
+        plotOptions: {
+            series: {
+                animation: false,
+                marker: {
+                    enabled: false,
+                    states: {
+                        hover: {
+                            enabled: false
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        halo: {
+                            size: 0
+                        }
+                    }
+                },
+                events: {
+                    mouseOver: function () {
+                        this.group.toFront();
+                    }
+                }
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{point.color}">\u25CF</span>' +
+                '{series.name}: <b>{point.formattedValue}</b><br/>'
+        },
+        xAxis: {
+            categories: [
+                'Tag Name',
+                'Q1, 2017',
+                'Q2, 2017',
+                'Q3, 2017',
+                'Q4, 2017'
+            ],
+            offset: 10
+        },
+        yAxis: [
+        {
+            categories: tags,
+            color:'rgba(11, 200, 200, 0.6)'
+        },{        
+            tooltipValueFormat: 'Q1 {value}'
+        }, {
+          
+            tooltipValueFormat: 'Q2 {value}'
+        },{
+          
+            tooltipValueFormat: 'Q3 {value}'
+        },{
+          
+            tooltipValueFormat: 'Q4 {value}'
+        }],
+        colors: ['rgba(11, 200, 200, 0.6)'],
+        series: dataArray.map(function (set, i) {
+          console.log(set);
+            set = set.map(function(val){
+                return Number(val);
+            })
+            return {
+                name: 'Tag: ' + tags[i],
+                data: set,
+                shadow: false,
+                lineWidth:3
+            };
+        })
+    });
+});
     </script>
   </body>
 </html>
