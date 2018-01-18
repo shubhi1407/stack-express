@@ -31,6 +31,29 @@ con.connect(function(err) {
     console.log("Connected!");
 });
 
+//Tags api
+app.get('/getData/tags',function(req,res){
+    con.query("select tagName, GROUP_CONCAT(count order by quarter desc SEPARATOR ', ') as counts from tags_analysis group by tagName",function(error,results){
+	if(error!=null){
+	    res.send(error);
+	    return;
+	}
+	
+	results = results.map(function(res){
+	    return {
+		tagName:res.tagName,
+		counts:res.counts.split(", ")
+	    }
+	});
+	res.json({
+	    tags: _.pluck(results,'tagName'),
+	    counts:_.pluck(results,'counts')
+	});
+		 
+    });
+})
+
+//Demographic API
 app.get('/getData/:table', function(req, res) {
 	var table=req.params.table;
 
